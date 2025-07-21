@@ -34,7 +34,6 @@ import { FileUploadModule } from 'src/app/services/common/file-upload/file-uploa
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    DialogModule,
     FileUploadModule    
   ]
 })
