@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { NgxSpinnerService } from "ngx-spinner";
 import { SpinnerType } from "src/app/base/base.component";
+import { _isAuthenticated } from "src/app/services/common/auth.service";
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from "src/app/services/ui/custom-toastr.service";
 
 @Injectable({
@@ -20,14 +21,16 @@ export class AuthGuard implements CanActivate{
 
     //const decodeToken = this.jwtHelper.decodeToken(token);
     //const expirationDate = this.jwtHelper.getTokenExpirationDate(token);
+    /*
     let expired: boolean;
     try {
       expired = this.jwtHelper.isTokenExpired(token);
     } catch {
       expired = true;
     }
+      */
 
-    if(!token || expired){
+    if(!_isAuthenticated) {
       // Token yoksa veya süresi dolmuşsa, kullanıcıyı login sayfasına yönlendir
       // ve geri dönülecek URL'yi query parametresi olarak ekle
       this.router.navigate(['login'], { queryParams: { returnUrl: state.url } });
