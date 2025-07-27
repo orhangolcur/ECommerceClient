@@ -11,6 +11,7 @@
             <input #txtPassword type="password" class="form-control" id="password" placeholder="Password">
         </div>
         <asl-google-signin-button type='icon' size='medium'></asl-google-signin-button>
+        <img src="../../../assets/facebook.png" style="width: 30px; height: 30px; cursor: pointer;" (click)="facebookLogin()" />
         <br>
         <button type="submit" class="btn btn-primary" (click)="login(txtUsernameOrEmail.value, txtPassword.value)">Login</button>        
     </div>

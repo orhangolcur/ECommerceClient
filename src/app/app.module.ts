@@ -10,7 +10,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './ui/components/login/login.component';
-import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { LoginConstant } from './constants/login_constant';
 
 
 @NgModule({
@@ -33,10 +34,11 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
         allowedDomains: ['localhost:7048'], 
       }
     }),
-    SocialLoginModule
+    SocialLoginModule,
+    GoogleSigninButtonModule 
   ],
   providers: [
-    {provide: 'baseUrl', useValue: 'https://localhost:7048/api', multi: true},
+    {provide: 'baseUrl', useValue: LoginConstant.API_BASE_URL, multi: true},
     {
       provide:"SocialAuthServiceConfig",
       useValue: {
@@ -44,8 +46,12 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('129143852320-tjj8oa2qtf2r6ab3m9fs64hnu4tgc3gf.apps.googleusercontent.com')
+            provider: new GoogleLoginProvider(LoginConstant.GOOGLE_CLIENT_ID)
           },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(LoginConstant.FACEBOOK_CLIENT_ID)
+          }
         ],
         onError: (err) => {
           console.error(err);
