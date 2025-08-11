@@ -7,21 +7,25 @@ import { AuthGuard } from './guards/common/auth.guard';
 
 const routes: Routes = [
   {
-    path: "admin", 
+    path: "admin",
     component: LayoutComponent, // admin kısmının layout componenti. admin olduğu sürece bu component kullanılacak ve görünüm bu component üzerinden yönetilecek. ne olursa olsun layouttaki footer ve header ve sidebar componentleri görünür olacak. 
     children: [
-       {path: "", component: DashboardComponent, canActivate: [AuthGuard]},
-       {path: "customers", loadChildren: () => import('./admin/components/customers/customers.module').then(m => m.CustomersModule), canActivate: [AuthGuard]}, 
-       {path: "products", loadChildren: () => import('./admin/components/products/products.module').then(m => m.ProductsModule), canActivate: [AuthGuard]},
-       {path: "orders", loadChildren: () => import('./admin/components/orders/orders.module').then(m => m.OrdersModule), canActivate: [AuthGuard]}, 
+      { path: "", component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: "customers", loadChildren: () => import('./admin/components/customers/customers.module').then(m => m.CustomersModule), canActivate: [AuthGuard] },
+      { path: "products", loadChildren: () => import('./admin/components/products/products.module').then(m => m.ProductsModule), canActivate: [AuthGuard] },
+      { path: "orders", loadChildren: () => import('./admin/components/orders/orders.module').then(m => m.OrdersModule), canActivate: [AuthGuard] },
     ], canActivate: [AuthGuard]
   },
-  {path: "", component: HomeComponent},
-  {path: "baskets", loadChildren: () => import('./ui/components/baskets/baskets.module').then(m => m.BasketsModule)},
-  {path: "products", loadChildren: () => import('./ui/components/products/products.module').then(m => m.ProductsModule)},
-  {path: "products/:pageNo", loadChildren: () => import('./ui/components/products/products.module').then(m => m.ProductsModule)},
-  {path: "register", loadChildren: () => import('./ui/components/register/register.module').then(m => m.RegisterModule)},
-  {path: "login", loadChildren: () => import('./ui/components/login/login.module').then(m => m.LoginModule)},
+  { path: "", component: HomeComponent },
+  { path: "baskets", loadChildren: () => import('./ui/components/baskets/baskets.module').then(m => m.BasketsModule) },
+  { path: "products", loadChildren: () => import('./ui/components/products/products.module').then(m => m.ProductsModule) },
+  { path: "products/:pageNo", loadChildren: () => import('./ui/components/products/products.module').then(m => m.ProductsModule) },
+  { path: "register", loadChildren: () => import('./ui/components/register/register.module').then(m => m.RegisterModule) },
+  { path: "login", loadChildren: () => import('./ui/components/login/login.module').then(m => m.LoginModule) },
+  { path: "password-reset", loadChildren: () => import('./ui/components/password-reset/password-reset.module').then(m => m.PasswordResetModule) },
+    { path: "update-password/:userId/:resetToken", loadChildren: () => import('./ui/components/update-password/update-password.module').then(m => m.UpdatePasswordModule) },
+
+
 ];
 
 @NgModule({
